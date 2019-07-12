@@ -22,7 +22,6 @@ use yii\bootstrap\ActiveForm;
         ]); ?>
 
     <?= $form->field($model, 'username')->textInput() ?>
-    <?= $form->field($model, 'password')->textInput() ?>
     <?= $form->field($model, 'email')->textInput() ?>
     <?= $form->field($model, 'status')->dropDownList(User::STATUS_LABELS) ?>
     <?=

@@ -23,7 +23,7 @@ use yii\widgets\ActiveForm;
 ?>
 
 <?= $form->field($model, 'username')->textInput() ?>
-<?= $form->field($model, 'password')->textInput() ?>
+<?//= $form->field($model, 'password')->textInput() ?>
 <?= $form->field($model, 'status')->dropDownList(User::STATUS_LABELS) ?>
 <?=
 //    https://github.com/mohorev/yii2-upload-behavior
