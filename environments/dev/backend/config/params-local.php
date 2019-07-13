@@ -1,4 +1,4 @@
 <?php
 return [
-    'chat.port' => 8081,
+    'chat.port' => 8080,
 ];

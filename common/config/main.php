@@ -6,7 +6,6 @@ use common\services\EmailService;
 use common\services\NotificationService;
 use common\services\TaskService;
 use common\services\UserService;
-use common\services\CommonService;
 use \common\services\TakeCompleteTaskEvent;
 
 return [
@@ -17,9 +16,6 @@ return [
     ],
     'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
     'components' => [
-        'commonService' => [
-            'class' => CommonService::class
-        ],
         'taskService' => [
             'class' => TaskService::class,
             'on '. TaskService::EVENT_TAKE_TASK => function (TakeCompleteTaskEvent $e) {

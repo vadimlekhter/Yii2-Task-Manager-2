@@ -44,3 +44,6 @@ phpunit.phar
 
 # ignore avatar's dir
 /frontend/web/upload
+
+# telegram token
+/telegram.txt
