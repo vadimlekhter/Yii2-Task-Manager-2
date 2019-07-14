@@ -15,7 +15,8 @@ use yii\base\Event;
  * Class TakeTaskEvent
  * @package common\services
  */
-class TakeCompleteTaskEvent extends Event {
+class TakeCompleteTaskEvent extends Event
+{
     /**
      * @var Project $project
      */
@@ -97,7 +98,8 @@ class TaskService extends Component
     /**
      * @param Task $task
      */
-    public  function sendEmailTakeTask ($task) {
+    public function sendEmailTakeTask($task)
+    {
 
         $event = $this->createTakeCompleteTaskEvent($task->project, Yii::$app->user->identity, $task);
         $this->trigger(self::EVENT_TAKE_TASK, $event);
@@ -116,7 +118,8 @@ class TaskService extends Component
     /**
      * @param Task $task
      */
-    public function sendEmailCompleteTask ($task) {
+    public function sendEmailCompleteTask($task)
+    {
 
         $event = $this->createTakeCompleteTaskEvent($task->project, Yii::$app->user->identity, $task);
         $this->trigger(self::EVENT_COMPLETE_TASK, $event);

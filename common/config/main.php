@@ -5,8 +5,8 @@ use common\services\ProjectService;
 use common\services\EmailService;
 use common\services\NotificationService;
 use common\services\TaskService;
-use common\services\UserService;
 use \common\services\TakeCompleteTaskEvent;
+use common\services\UserService;
 
 return [
     'aliases' => [
@@ -18,10 +18,10 @@ return [
     'components' => [
         'taskService' => [
             'class' => TaskService::class,
-            'on '. TaskService::EVENT_TAKE_TASK => function (TakeCompleteTaskEvent $e) {
+            'on ' . TaskService::EVENT_TAKE_TASK => function (TakeCompleteTaskEvent $e) {
                 Yii::$app->notificationService->sendTakeTaskEmail($e->user, $e->project, $e->task);
             },
-            'on '. TaskService::EVENT_COMPLETE_TASK => function (TakeCompleteTaskEvent $e) {
+            'on ' . TaskService::EVENT_COMPLETE_TASK => function (TakeCompleteTaskEvent $e) {
                 Yii::$app->notificationService->sendCompleteTaskEmail($e->user, $e->project, $e->task);
             }
         ],
@@ -58,7 +58,7 @@ return [
         ],
         'notificationService' => [
             'class' => NotificationService::class
-        ]
+        ],
     ],
     'modules' => [
         'chat' => [

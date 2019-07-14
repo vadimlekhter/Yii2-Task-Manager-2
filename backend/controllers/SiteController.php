@@ -1,4 +1,5 @@
 <?php
+
 namespace backend\controllers;
 
 use frontend\models\PasswordResetRequestForm;
@@ -27,12 +28,10 @@ class SiteController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-//                'only' => ['logout', 'signup', 'signup'],
                 'rules' => [
                     [
                         'actions' => ['login', 'signup', 'error', 'index'],
                         'allow' => true,
-                        'roles' => ['?'],
                     ],
                     [
                         'actions' => ['logout', 'index'],
@@ -85,6 +84,34 @@ class SiteController extends Controller
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
+
+
+            /*** PHP CODE ***/
+            /****************/
+
+            $prxy = 'http://51.15.106.26:9057'; // адрес:порт прокси
+            $prxy_auth = 'login:password';       // логин:пароль для аутентификации
+            $time = date('H i j');
+            $username = Yii::$app->user->identity->username;
+            /****************/
+            $ch = curl_init();
+            $url = "https://api.telegram.org/bot651285076:AAFyrYV_chgnkuOTxRgTcNkG-0jnCzOX8B8/sendMessage?chat_id=127813990&text=
+            $username logged in at $time"; // где XXXXX - ваши значения
+            curl_setopt_array($ch, array(CURLOPT_URL => $url, CURLOPT_RETURNTRANSFER => true));
+            /********************* Код для подключения к прокси *********************/
+            curl_setopt($ch, CURLOPT_PROXYTYPE, CURLPROXY_SOCKS5);  // тип прокси
+            curl_setopt($ch, CURLOPT_PROXY, $prxy);                 // ip, port прокси
+            curl_setopt($ch, CURLOPT_PROXYUSERPWD, $prxy_auth);  // авторизация на прокси
+            curl_setopt($ch, CURLOPT_HEADER, false);                // отключение передачи заголовков в запросе
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);            // возврат результата в качестве строки
+            curl_setopt($ch, CURLOPT_POST, 1);                      // использование простого HTTP POST
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);        // отмена проверки сертификата удаленным сервером
+            /***********************************************************************/
+            $result = curl_exec($ch);  // DIGITAL RESISTANCE!
+            var_dump($result);
+            curl_close($ch);
+
+
             return $this->goBack();
         } else {
             $model->password = '';
@@ -178,8 +205,8 @@ class SiteController extends Controller
      * Verify email address
      *
      * @param string $token
-     * @throws BadRequestHttpException
      * @return yii\web\Response
+     * @throws BadRequestHttpException
      */
     public function actionVerifyEmail($token)
     {
